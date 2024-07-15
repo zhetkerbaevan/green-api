@@ -29,15 +29,11 @@ type State struct {
 }
 
 type MessagePayload struct {
-	ChatID          string `json:"chatId"`
-	Message         string `json:"message"`
-	QuotedMessageID string `json:"quotedMessageId"`
+	ChatID  string `json:"chatId"`
+	Message string `json:"message"`
 }
 
 type FileMessagePayload struct {
-	ChatID          string `json:"chatId"`
-	URLFile         string `json:"urlFile"`
-	FileName        string `json:"fileName"`
-	Caption         string `json:"caption"`
-	QuotedMessageID string `json:"quotedMessageId"`
+	ChatID  string `json:"chatId"`
+	URLFile string `json:"urlFile"`
 }

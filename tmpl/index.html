@@ -16,7 +16,7 @@
     <h3>GREEN-API</h3>
     <div class="container">
       <div class="column">
-        <form action="/get-settings" method="GET" onsubmit="sendForm(event)">
+        <form id="apiForm" method="GET">
           <input
             type="text"
             class="form-control"
@@ -33,10 +33,18 @@
             placeholder="APITokenInstance"
             required
           /><br />
-          <button type="submit" class="btn btn-secondary">getSettings</button>
-        </form>
-        <form action="/get-state-instance" method="GET">
-          <button type="submit" class="btn btn-secondary">
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            onclick="handleSubmit('get-settings')"
+          >
+            getSettings
+          </button>
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            onclick="handleSubmit('get-state-instance')"
+          >
             getStateInstance</button
           ><br />
         </form>
@@ -89,5 +97,12 @@
         </div>
       </div>
     </div>
+    <script>
+      function handleSubmit(action) {
+        const form = document.getElementById("apiForm");
+        form.action = "/" + action;
+        form.submit();
+      }
+    </script>
   </body>
 </html>

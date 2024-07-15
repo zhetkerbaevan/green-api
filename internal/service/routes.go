@@ -83,7 +83,43 @@ func (h *Handler) handleGetSettings(w http.ResponseWriter, r *http.Request) {
 
 
 func (h *Handler) handleGetStateInstance(w http.ResponseWriter, r *http.Request) {
+	idInstance := r.FormValue("idInstance")
+	apiTokenInstance := r.FormValue("apiTokenInstance")
+	apiUrl := idInstance[:4]
 
+	//Form url 
+	url := fmt.Sprintf("https://%s.api.greenapi.com/waInstance%s/getStateInstance/%s", apiUrl, idInstance, apiTokenInstance)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	defer resp.Body.Close()
+
+	//Read body
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var state models.State
+	if err := json.Unmarshal(body, &state); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	stateJSON, err := json.MarshalIndent(state, "", "  ") //Convert to JSON
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Update the data map with the result
+	h.data["Result"] = string(stateJSON) 
+	tmpl.Execute(w, h.data)
 }
 
 func (h *Handler) handleSendMessage(w http.ResponseWriter, r *http.Request) {
