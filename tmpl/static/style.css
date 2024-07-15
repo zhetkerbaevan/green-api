@@ -1,0 +1,27 @@
+h3 {
+  text-align: center;
+}
+.container {
+  display: flex;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 10px;
+  margin: 5px;
+}
+
+.column input,
+.column button {
+  margin-bottom: 10px;
+}
