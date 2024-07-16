@@ -16,7 +16,7 @@ make run
 ```
 To work with any method, you need to get acquainted with [Before start](https://green-api.com/docs/before-start/#parameters).  
 ## Methods
-• [getSettings](https://green-api.com/docs/api/account/GetSettings/)
-• [getStateInstance](https://green-api.com/docs/api/account/GetStateInstance/)
-• [sendMessage](https://green-api.com/docs/api/sending/SendMessage/)
-• [sendFileByUrl](https://green-api.com/docs/api/sending/SendFileByUrl/)
+• [getSettings](https://green-api.com/docs/api/account/GetSettings/)  
+• [getStateInstance](https://green-api.com/docs/api/account/GetStateInstance/)  
+• [sendMessage](https://green-api.com/docs/api/sending/SendMessage/)  
+• [sendFileByUrl](https://green-api.com/docs/api/sending/SendFileByUrl/)  
