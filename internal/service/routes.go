@@ -1,6 +1,7 @@
 package service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -123,7 +124,55 @@ func (h *Handler) handleGetStateInstance(w http.ResponseWriter, r *http.Request)
 }
 
 func (h *Handler) handleSendMessage(w http.ResponseWriter, r *http.Request) {
+	idInstance := r.FormValue("idInstance")
+	apiTokenInstance := r.FormValue("apiTokenInstance")
+	apiUrl := idInstance[:4]
 
+	url := fmt.Sprintf("https://%s.api.greenapi.com/waInstance%s/sendMessage/%s", apiUrl, idInstance, apiTokenInstance)
+
+	chatId := r.FormValue("chatId1") + "@c.us" 
+	message := r.FormValue("message")
+
+	var messagePayload models.MessagePayload
+	messagePayload.ChatID = chatId
+	messagePayload.Message = message
+
+	jsonData, err := json.Marshal(messagePayload) //Convert data to JSON
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	resp, err := http.Post(url, "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer resp.Body.Close()
+
+	//Read body
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	//Get data from body to structure MessageResponse
+	var messageResponse models.MessageResponse
+	if err := json.Unmarshal(body, &messageResponse); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	messageResponseJSON, err := json.MarshalIndent(messageResponse, "", "  ") //Convert to JSON
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Update the data map with the result
+	h.data["Result"] = string(messageResponseJSON) 
+	tmpl.Execute(w, h.data)
 }
 
 func (h *Handler) handleSendFileByUrl(w http.ResponseWriter, r *http.Request) {

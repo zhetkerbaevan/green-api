@@ -48,13 +48,19 @@
             getStateInstance</button
           ><br />
         </form>
-        <form action="/send-message" method="POST">
+        <form action="/send-message" method="POST" onsubmit="prepareForm(this)">
+          <input type="hidden" id="hiddenIdInstanceMessage" name="idInstance" />
+          <input
+            type="hidden"
+            id="hiddenApiTokenInstanceMessage"
+            name="apiTokenInstance"
+          />
           <input
             type="text"
             class="form-control"
             id="chatId"
-            name="chatId"
-            placeholder="chatId"
+            name="chatId1"
+            placeholder="phone number"
             required
           />
           <input
@@ -68,13 +74,23 @@
           <button type="submit" class="btn btn-secondary">sendMessage</button
           ><br />
         </form>
-        <form action="/send-file-by-url" method="POST">
+        <form
+          action="/send-file-by-url"
+          method="POST"
+          onsubmit="prepareForm(this)"
+        >
+          <input type="hidden" id="hiddenIdInstanceMessage" name="idInstance" />
+          <input
+            type="hidden"
+            id="hiddenApiTokenInstanceMessage"
+            name="apiTokenInstance"
+          />
           <input
             type="text"
             class="form-control"
             id="chatId"
-            name="chatId"
-            placeholder="chatId"
+            name="chatId2"
+            placeholder="phone number"
             required
           />
           <input
@@ -102,6 +118,24 @@
         const form = document.getElementById("apiForm");
         form.action = "/" + action;
         form.submit();
+      }
+
+      function prepareForm(form) {
+        const idInstance = document.getElementById("idInstance").value;
+        const apiTokenInstance =
+          document.getElementById("apiTokenInstance").value;
+
+        //Set values for hidden forms
+        const hiddenIdInstanceField = form.querySelector(
+          "input[name='idInstance']"
+        );
+        const hiddenApiTokenInstanceField = form.querySelector(
+          "input[name='apiTokenInstance']"
+        );
+
+        if (hiddenIdInstanceField) hiddenIdInstanceField.value = idInstance;
+        if (hiddenApiTokenInstanceField)
+          hiddenApiTokenInstanceField.value = apiTokenInstance;
       }
     </script>
   </body>

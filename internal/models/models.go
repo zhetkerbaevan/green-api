@@ -37,3 +37,7 @@ type FileMessagePayload struct {
 	ChatID  string `json:"chatId"`
 	URLFile string `json:"urlFile"`
 }
+
+type MessageResponse struct {
+	IdMessage string `json:"idMessage"`
+}
