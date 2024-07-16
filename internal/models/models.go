@@ -34,8 +34,9 @@ type MessagePayload struct {
 }
 
 type FileMessagePayload struct {
-	ChatID  string `json:"chatId"`
-	URLFile string `json:"urlFile"`
+	ChatID   string `json:"chatId"`
+	URLFile  string `json:"urlFile"`
+	FileName string `json:"fileName"`
 }
 
 type MessageResponse struct {
