@@ -33,6 +33,7 @@ func (h *Handler) RegisterRoutes(router *mux.Router) {
 }
 
 func (h *Handler) homeHandler(w http.ResponseWriter, r *http.Request) {
+	h.data["Result"] = ""
 	tmpl.Execute(w, h.data)
 }
 
