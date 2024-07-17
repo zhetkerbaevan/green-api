@@ -2,12 +2,17 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/zhetkerbaevan/green-api/cmd/api"
 )
 
 func main() {
-	server := api.NewAPIServer(":9000")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9000" //Locally we use port 9000
+	}
+	server := api.NewAPIServer(":" + port)
 	if err := server.Run(); err != nil {
 		log.Fatal(err)
 	}
