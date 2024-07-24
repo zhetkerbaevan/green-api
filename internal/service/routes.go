@@ -60,12 +60,6 @@ func (h *Handler) handleGetSettings(w http.ResponseWriter, r *http.Request) {
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		h.data["Result"] = fmt.Sprintf("Error: received status code %d", resp.StatusCode)
-		tmpl.Execute(w, h.data)
-		return
-	}
-
 	//Read body
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -115,12 +109,6 @@ func (h *Handler) handleGetStateInstance(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		h.data["Result"] = fmt.Sprintf("Error: received status code %d", resp.StatusCode)
-		tmpl.Execute(w, h.data)
-		return
-	}
 
 	//Read body
 	body, err := io.ReadAll(resp.Body)
@@ -182,12 +170,6 @@ func (h *Handler) handleSendMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		h.data["Result"] = fmt.Sprintf("Error: received status code %d", resp.StatusCode)
-		tmpl.Execute(w, h.data)
-		return
-	}
 
 	//Read body
 	body, err := io.ReadAll(resp.Body)
@@ -258,12 +240,6 @@ func (h *Handler) handleSendFileByUrl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		h.data["Result"] = fmt.Sprintf("Error: received status code %d", resp.StatusCode)
-		tmpl.Execute(w, h.data)
-		return
-	}
 
 	//Read body
 	body, err := io.ReadAll(resp.Body)
