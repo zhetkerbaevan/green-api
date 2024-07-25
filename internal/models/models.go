@@ -10,6 +10,7 @@ type Settings struct {
 	MarkIncomingMessagesReaded        string `json:"markIncomingMessagesReaded"`
 	MarkIncomingMessagesReadedOnReply string `json:"markIncomingMessagesReadedOnReply"`
 	SharedSession                     string `json:"sharedSession"`
+	ProxyInstance                     string `json:"proxyInstance"`
 	OutgoingWebhook                   string `json:"outgoingWebhook"`
 	OutgoingMessageWebhook            string `json:"outgoingMessageWebhook"`
 	OutgoingAPIMessageWebhook         string `json:"outgoingAPIMessageWebhook"`
